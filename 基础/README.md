@@ -380,3 +380,139 @@ void main(List<String> args) {
 
 
 
+#### 面向对象
+
+##### 类的定义
+
+```dart
+// dart中顶一个类与Java中类似，但是Dart中没有private，public这些成员修饰符
+// 如果有私有成员，不希望外面访问，只需要在成员变量前加上下划线"_"即刻便为私有。
+// 注意在Dart中工造方法不可以重载
+class Person {
+  String? name;
+  int? _age;
+
+  // 普通的构造方法
+  // Person(String name, int _age) {
+  //   this.name = name;
+  //   this._age = _age;
+  // }
+
+  // 在工造方法中初始话成员变量时可以如下简写：
+  Person(this.name, this._age);
+  // Person({this.name, this._age});
+
+  // 如果处理其他变量时可以单独操作
+  // Person(this.name, this._age, this.address) {
+  //   print(address)
+  // }
+}
+
+void main(List<String> args) {
+  Person p = Person('wang', 12);
+  print(p.name);
+  print(p._age);
+}
+
+```
+
+##### get和set方法
+
+```dart
+class Person {
+  String username;
+  Person(this.username);
+
+  // 方法名前加 get关键字
+  String get name {
+    return "user:" + this.username;
+  }
+
+  // 方法名前加 set关键字
+  void set name(String name) {
+    this.username = name;
+  }
+}
+
+void main(List<String> args) {
+  Person p = Person("wangRich");
+  print(p.name);//等于调用get方法
+  p.name = 'wangFuGui';
+  print(p.name);
+}
+```
+
+##### 命名构造方法
+
+```dart
+class Person {
+  String? name;
+  int? age;
+  Person(this.name, this.age);
+
+// 命名构造方法
+  Person.fromData(Map data) {
+    this.name = data['name'];
+    this.age = data['age'];
+  }
+}
+
+void main(List<String> args) {
+  Person p = Person.fromData({"name": "jiangyh", "age": 12});
+  print(p.name);
+  
+  Person p2 = Person("jyh", 12);
+  print(p2.name);
+}
+```
+
+##### 常量构造方法
+
+```dart
+class ConstPoint {
+  final num x;
+  final num y;
+
+  // 使用const构造方法
+  const ConstPoint(this.x, this.y);
+
+  // 编译时常量对象，需要使用const来创建对象
+  static final ConstPoint origin = const ConstPoint(10, 20);
+}
+
+void main(List<String> args) {
+  ConstPoint point = ConstPoint(50, 30);
+  print(point.x + point.y);
+
+// 使用常量对象
+  print(ConstPoint.origin.x);
+}
+```
+
+##### 构造方法重定向
+
+```dart
+class Point {
+  num x;
+  num y;
+  // 同名的构造方法
+  Point(this.x, this.y);
+
+// 命名的构造方法重定向到同名构造方法，中间使用一个冒号
+  Point.alongXAxis(num x) : this(x, 0);
+}
+
+void main(List<String> args) {
+  Point p = Point(10, 20);
+  print('p.x:${p.x}, p.y:${p.y}');
+
+  Point p2 = Point.alongXAxis(10);
+  print('p2.x:${p2.x}, p2.y:${p2.y}');
+}
+```
+
+##### 类的初始化列表
+
+```dart
+```
+

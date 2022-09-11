@@ -15,7 +15,7 @@ void main(){
   null
   true */
   //命名可选参数；参数和顺序无关
-enableFlags(hidden: true);
+enableFlags(hidden: true, bold: false);
 //位置可选参数：必须按顺序传值
 add(x: 2);
 add1(5,10);
